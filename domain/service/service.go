@@ -1,13 +1,18 @@
 package service
 
-import "strider-challenge/domain/contract"
+import (
+	"strider-challenge/domain/contract"
+	"strider-challenge/infra/config"
+)
 
 type Service struct {
-	Repo contract.RepoManager
+	Config *config.Config
+	Repo   contract.RepoManager
 }
 
-func NewService(repo contract.RepoManager) *Service {
+func NewService(cfg *config.Config, repo contract.RepoManager) *Service {
 	return &Service{
-		Repo: repo,
+		Config: cfg,
+		Repo:   repo,
 	}
 }
