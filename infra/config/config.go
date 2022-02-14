@@ -8,6 +8,10 @@ import (
 type Config struct {
 	ServerPort  int  `mapstructure:"SERVER_PORT"`
 	ServerDebug bool `mapstructure:"SERVER_DEBUG"`
+
+	DBName string `mapstructure:"DB_NAME"`
+	DBUser string `mapstructure:"DB_USER"`
+	DBPass string `mapstructure:"DB_PASS"`
 }
 
 // initConfig reads in config file and ENV variables if set.
