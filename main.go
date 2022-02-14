@@ -6,6 +6,7 @@ import (
 	"strider-challenge/app/server"
 	"strider-challenge/domain/service"
 	"strider-challenge/infra/config"
+	"strider-challenge/infra/database"
 	"strider-challenge/infra/database/repository"
 	"time"
 
@@ -17,16 +18,17 @@ func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 
 	cfg, err := config.Read()
-	if err != nil {
-		EndAsErr("::fail to read config", err)
-	}
+	EndAsErr("::fail to read config", err)
 
-	repoManager := repository.NewRepoManager(nil)
+	dbConn, err := database.ConnectDataBase(&cfg)
+	EndAsErr("::fail to read config", err)
+
+	repoManager := repository.NewRepoManager(dbConn)
 	svc := service.NewService(&cfg, repoManager)
 
 	srv := server.NewServer(&cfg)
 	err = srv.InitServer(svc)
-	EndAsErr("::fail init server", err)
+	EndAsErr("::fail to init server", err)
 }
 
 func EndAsErr(message string, err error) {

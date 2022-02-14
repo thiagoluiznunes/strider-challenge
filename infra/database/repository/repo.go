@@ -1,12 +1,15 @@
 package repository
 
-import "strider-challenge/domain/contract"
+import (
+	"database/sql"
+	"strider-challenge/domain/contract"
+)
 
 type RepoManager struct {
-	conn interface{} // example: mongoConn *mongo.Database
+	conn *sql.DB
 }
 
-func NewRepoManager(conn interface{}) contract.RepoManager {
+func NewRepoManager(conn *sql.DB) contract.RepoManager {
 	return &RepoManager{
 		conn: conn,
 	}

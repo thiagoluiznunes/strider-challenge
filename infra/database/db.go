@@ -1,25 +1,39 @@
-package db
+package database
 
 import (
+	"database/sql"
 	"strider-challenge/infra/config"
 	"sync"
+	"time"
 
+	"github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"
 )
 
-func ConnectDataBase(cfg *config.Config) (conn interface{}, connErr error) {
+var (
+	instance     *sql.DB
+	onceDataBase sync.Once
+	connErr      error
+)
 
-	var onceDataBase sync.Once
+func ConnectDataBase(cfg *config.Config) (*sql.DB, error) {
 
 	onceDataBase.Do(func() {
-		logrus.Info("intiate connection to database")
+		logrus.Info("::database connection initiated")
 
-		// TODO: create connection
-		conn = nil
-		connErr = nil
+		myConfig := mysql.Config{
+			User:   cfg.DBUser,
+			Passwd: cfg.DBPass,
+			DBName: cfg.DBName,
+			Loc:    &time.Location{},
+		}
+		instance, connErr = sql.Open("mysql", myConfig.FormatDSN())
+		if connErr != nil {
+			return
+		}
 
-		logrus.Info("connected to DataBase")
+		logrus.Info("::database connection established")
 	})
 
-	return conn, connErr
+	return instance, connErr
 }
