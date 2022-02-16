@@ -21,7 +21,7 @@ func main() {
 	EndAsErr("::fail to read config", err)
 
 	dbConn, err := database.ConnectDataBase(&cfg)
-	EndAsErr("::fail to read config", err)
+	EndAsErr("::fail connect to database", err)
 
 	repoManager := repository.NewRepoManager(dbConn)
 	svc := service.NewService(&cfg, repoManager)
