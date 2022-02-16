@@ -9,6 +9,8 @@ type Config struct {
 	ServerPort  int  `mapstructure:"SERVER_PORT"`
 	ServerDebug bool `mapstructure:"SERVER_DEBUG"`
 
+	DBHost string `mapstructure:"DB_HOST"`
+	DBPort string `mapstructure:"DB_PORT"`
 	DBName string `mapstructure:"DB_NAME"`
 	DBUser string `mapstructure:"DB_USER"`
 	DBPass string `mapstructure:"DB_PASS"`
