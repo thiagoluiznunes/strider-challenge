@@ -73,7 +73,8 @@ func (s *Server) InitServer(svc *service.Service) (err error) {
 
 	baseRouter := router.NewBaseRouter()
 
-	homePageCtrl := routehomepage.NewController(svc.Config, nil)
+	homePageSvc := service.NewHomePageService(*svc)
+	homePageCtrl := routehomepage.NewController(homePageSvc)
 	homePageRoute := routehomepage.NewRoute("homepage", homePageCtrl)
 
 	s.addRoute(baseRouter)

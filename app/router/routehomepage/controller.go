@@ -1,23 +1,21 @@
 package routehomepage
 
 import (
+	"context"
 	"strider-challenge/app/router/routeutils"
 	viewmodel "strider-challenge/app/viewmodel/homepage"
 	"strider-challenge/domain/contract"
-	"strider-challenge/infra/config"
 
 	"github.com/labstack/echo/v4"
 )
 
 type Controller struct {
-	cfg     *config.Config
-	service contract.HomeService
+	homeService contract.HomeService
 }
 
-func NewController(cfg *config.Config, service contract.HomeService) *Controller {
+func NewController(homeService contract.HomeService) *Controller {
 	return &Controller{
-		cfg:     cfg,
-		service: service,
+		homeService: homeService,
 	}
 }
 
@@ -32,5 +30,10 @@ func (c *Controller) GetAllPosts(ctx echo.Context) error {
 		return routeutils.HandleAPIError(ctx, err)
 	}
 
-	return routeutils.ResponseAPIOK(ctx, "OK")
+	result, err := c.homeService.GetAllPosts(context.Background(), homePageRequestParams)
+	if err != nil {
+		return routeutils.HandleAPIError(ctx, err)
+	}
+
+	return routeutils.ResponseAPIOK(ctx, result)
 }
