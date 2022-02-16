@@ -11,7 +11,7 @@ type Route struct {
 	ctrl *Controller
 }
 
-func NewHomePageRoute(name string, ctrl *Controller) *Route {
+func NewRoute(name string, ctrl *Controller) *Route {
 	return &Route{
 		name: name,
 		ctrl: ctrl,
@@ -19,5 +19,8 @@ func NewHomePageRoute(name string, ctrl *Controller) *Route {
 }
 
 func (r *Route) Register(e *echo.Echo) {
+
+	group := e.Group(rootGroup + r.name)
+	group.GET(":switch", r.ctrl.GetAllPosts)
 
 }
