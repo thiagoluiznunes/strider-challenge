@@ -11,4 +11,6 @@ type RepoManager interface {
 
 type PostRepo interface {
 	Add(ctx context.Context, post entity.Post) (postID int64, err error)
+	GetAllPosts(ctx context.Context) (posts []entity.Post, err error)
+	GetAllPostsByFollowing(ctx context.Context, usersFollowingIDs []interface{}) (posts []entity.Post, err error)
 }
