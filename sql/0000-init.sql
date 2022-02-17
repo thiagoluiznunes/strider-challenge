@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `strider`.`posts` (
     `post_id` INT,
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `uuid_index` (`uuid`),
     PRIMARY KEY (`id`),
     FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`)
 ) ENGINE = INNODB;

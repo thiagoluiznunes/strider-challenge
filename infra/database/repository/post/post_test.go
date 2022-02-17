@@ -65,8 +65,8 @@ func TestPostRepo(t *testing.T) {
 		CreateDatabase(t, ctx, conn)
 	})
 
-	t.Run("create post table", func(t *testing.T) {
-		CreatePostTable(t, ctx, conn)
+	t.Run("create posts table", func(t *testing.T) {
+		CreatePostsTable(t, ctx, conn)
 	})
 
 	t.Run("add post", func(t *testing.T) {
@@ -80,8 +80,8 @@ func CreateDatabase(t *testing.T, ctx context.Context, conn *sql.DB) {
 	assert.NotEmpty(t, result)
 }
 
-func CreatePostTable(t *testing.T, ctx context.Context, conn *sql.DB) {
-	result, err := conn.Exec(CreatePostTableQuery)
+func CreatePostsTable(t *testing.T, ctx context.Context, conn *sql.DB) {
+	result, err := conn.Exec(CreatePostsTableQuery)
 	assert.Nil(t, err)
 	assert.NotEmpty(t, result)
 }

@@ -29,6 +29,7 @@ func ConnectDataBase(cfg *config.Config) (*sql.DB, error) {
 			Passwd:               cfg.DBPass,
 			DBName:               cfg.DBName,
 			Loc:                  &time.Location{},
+			ParseTime:            true,
 			AllowNativePasswords: true,
 		}
 

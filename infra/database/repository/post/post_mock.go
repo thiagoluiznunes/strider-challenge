@@ -13,7 +13,7 @@ func NewString(s string) *string {
 
 const CreateDatabaseQuery = `CREATE DATABASE IF NOT EXISTS strider;`
 
-const CreatePostTableQuery = `
+const CreatePostsTableQuery = `
 	CREATE TABLE IF NOT EXISTS posts (
 		id INTEGER AUTO_INCREMENT NOT NULL,
 		uuid VARCHAR(36) NOT NULL,
