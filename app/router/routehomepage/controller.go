@@ -2,8 +2,9 @@ package routehomepage
 
 import (
 	"context"
+	"net/http"
 	"strider-challenge/app/router/routeutils"
-	viewmodel "strider-challenge/app/viewmodel/homepage"
+	"strider-challenge/app/viewmodel"
 	"strider-challenge/domain/contract"
 
 	"github.com/labstack/echo/v4"
@@ -36,4 +37,27 @@ func (c *Controller) GetAllPosts(ctx echo.Context) error {
 	}
 
 	return routeutils.ResponseAPIOK(ctx, result)
+}
+
+func (c *Controller) AddPost(ctx echo.Context) error {
+
+	postRequest := new(viewmodel.PostRequest)
+
+	// Mocking UserID
+	var userID int64 = 1
+	postRequest.UserID = &userID
+
+	if err := ctx.Bind(postRequest); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	if err := postRequest.Validate(); err != nil {
+		return routeutils.HandleAPIError(ctx, err)
+	}
+
+	err := c.homeService.AddPost(context.Background(), postRequest)
+	if err != nil {
+		return routeutils.HandleAPIError(ctx, err)
+	}
+
+	return routeutils.ResponseAPIOK(ctx, "OK")
 }

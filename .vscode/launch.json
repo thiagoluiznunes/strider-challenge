@@ -19,6 +19,6 @@
             "buildFlags": "-tags 'integration unit'",
             "program": "${fileDirname}",
             "showLog": true
-          }
+        }
     ]
 }

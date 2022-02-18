@@ -1,4 +1,4 @@
-package post
+package mock
 
 import "github.com/google/uuid"
 
@@ -9,6 +9,10 @@ func NewUUID() *string {
 
 func NewString(s string) *string {
 	return &s
+}
+
+func NewUserID(id int64) *int64 {
+	return &id
 }
 
 const CreateDatabaseQuery = `CREATE DATABASE IF NOT EXISTS strider;`

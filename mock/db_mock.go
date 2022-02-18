@@ -1,9 +1,10 @@
-package database
+package mock
 
 import (
 	"context"
 	"fmt"
 	"strider-challenge/infra/config"
+	"testing"
 
 	"github.com/docker/go-connections/nat"
 	"github.com/testcontainers/testcontainers-go"
@@ -16,7 +17,7 @@ type MySQLContainer struct {
 	HostPort  string
 }
 
-func SetupMySQLContainer(ctx context.Context, cfg config.Config, startContainer bool) (*MySQLContainer, error) {
+func setupMySQLContainer(ctx context.Context, cfg config.Config, startContainer bool) (*MySQLContainer, error) {
 
 	tcpPort := fmt.Sprintf("%s/tcp", cfg.DBPort)
 
@@ -50,4 +51,30 @@ func SetupMySQLContainer(ctx context.Context, cfg config.Config, startContainer 
 		HostPort:  ports[nat.Port(tcpPort)][0].HostPort,
 		HostIP:    ports[nat.Port(tcpPort)][0].HostIP,
 	}, nil
+}
+
+func InitDatabaseInstance(t *testing.T, ctx context.Context, startContainer bool) (mysqlContainer *MySQLContainer, cfg config.Config, err error) {
+
+	cfg = config.Config{
+		DBName: "strider",
+		DBPass: "secret",
+		DBUser: "root",
+	}
+
+	if testing.Short() {
+		t.Skip("skipping integration test")
+	}
+
+	if startContainer {
+		t.Run("create mysql container instance", func(t *testing.T) {
+			mysqlContainer, err = setupMySQLContainer(ctx, cfg, startContainer)
+			if err != nil {
+				t.Errorf("setupMySQLContainer() error = %v", err)
+			}
+		})
+		cfg.DBHost = mysqlContainer.HostIP
+		cfg.DBPort = mysqlContainer.HostPort
+	}
+
+	return mysqlContainer, cfg, err
 }

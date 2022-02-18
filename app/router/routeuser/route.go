@@ -1,10 +1,9 @@
-package routehomepage
+package routeuser
 
 import "github.com/labstack/echo/v4"
 
 const (
 	rootGroup = "/"
-	post      = "/post"
 )
 
 type Route struct {
@@ -22,7 +21,6 @@ func NewRoute(name string, ctrl *Controller) *Route {
 func (r *Route) Register(e *echo.Echo) {
 
 	group := e.Group(rootGroup + r.name)
-	group.GET(":switch", r.ctrl.GetAllPosts)
-	group.POST(post, r.ctrl.AddPost)
+	group.GET(":id", r.ctrl.GetUser)
 
 }

@@ -4,7 +4,10 @@ import (
 	"context"
 	"flag"
 	"strider-challenge/infra/config"
+	"strider-challenge/mock"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var startContainer bool
@@ -15,34 +18,11 @@ func init() {
 
 func TestConnection(t *testing.T) {
 
-	var mysqlContainer *MySQLContainer
-	var err error
-
 	ctx := context.Background()
-	cfg := config.Config{
-		DBName: "strider",
-		DBPass: "secret",
-		DBHost: "mysql",
-		DBPort: "3306",
-		DBUser: "root",
-	}
+	mysqlContainer, cfg, err := mock.InitDatabaseInstance(t, ctx, startContainer)
+	assert.NoError(t, err)
 
-	if testing.Short() {
-		t.Skip("skipping integration test")
-	}
-
-	if startContainer {
-		t.Run("create mysql container instance", func(t *testing.T) {
-			mysqlContainer, err = SetupMySQLContainer(ctx, cfg, startContainer)
-			if err != nil {
-				t.Errorf("SetupMySQLContainer() error = %v", err)
-			}
-		})
-		cfg.DBHost = mysqlContainer.HostIP
-		cfg.DBPort = mysqlContainer.HostPort
-
-		defer mysqlContainer.Terminate(ctx)
-	}
+	defer mysqlContainer.Terminate(ctx)
 
 	t.Run("test mysql connection instance", func(t *testing.T) {
 		type args struct {
