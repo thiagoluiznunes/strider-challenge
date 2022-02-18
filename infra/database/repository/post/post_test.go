@@ -6,8 +6,8 @@ import (
 	"flag"
 	"strider-challenge/domain/contract"
 	"strider-challenge/domain/entity"
-	"strider-challenge/infra/config"
 	"strider-challenge/infra/database"
+	"strider-challenge/mock"
 	"testing"
 	"time"
 
@@ -23,34 +23,11 @@ func init() {
 
 func TestPostRepo(t *testing.T) {
 
-	var mysqlContainer *database.MySQLContainer
-	var err error
-
 	ctx := context.Background()
-	cfg := config.Config{
-		DBName: "strider",
-		DBPass: "secret",
-		DBHost: "mysql",
-		DBPort: "3306",
-		DBUser: "root",
-	}
+	mysqlContainer, cfg, err := mock.InitDatabaseInstance(t, ctx, startContainer)
+	assert.NoError(t, err)
 
-	if testing.Short() {
-		t.Skip("skipping integration test")
-	}
-
-	if startContainer {
-		t.Run("create mysql container instance", func(t *testing.T) {
-			mysqlContainer, err = database.SetupMySQLContainer(ctx, cfg, startContainer)
-			if err != nil {
-				t.Errorf("database.() error = %v", err)
-			}
-		})
-		cfg.DBHost = mysqlContainer.HostIP
-		cfg.DBPort = mysqlContainer.HostPort
-
-		defer mysqlContainer.Terminate(ctx)
-	}
+	defer mysqlContainer.Terminate(ctx)
 
 	conn, err = database.ConnectDataBase(&cfg)
 	if err != nil {
@@ -75,13 +52,13 @@ func TestPostRepo(t *testing.T) {
 }
 
 func CreateDatabase(t *testing.T, ctx context.Context, conn *sql.DB) {
-	result, err := conn.Exec(CreateDatabaseQuery)
+	result, err := conn.Exec(mock.CreateDatabaseQuery)
 	assert.Nil(t, err)
 	assert.NotEmpty(t, result)
 }
 
 func CreatePostsTable(t *testing.T, ctx context.Context, conn *sql.DB) {
-	result, err := conn.Exec(CreatePostsTableQuery)
+	result, err := conn.Exec(mock.CreatePostsTableQuery)
 	assert.Nil(t, err)
 	assert.NotEmpty(t, result)
 }
@@ -104,8 +81,8 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			args: args{
 				entity.Post{
 					Type:      "original",
-					Text:      NewString("My original twitter test without uuid"),
-					UserID:    1,
+					Text:      mock.NewString("My original twitter test without uuid"),
+					UserID:    mock.NewUserID(1),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -116,10 +93,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with empty type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "",
-					Text:      NewString("My twitter test with empty type"),
-					UserID:    1,
+					Text:      mock.NewString("My twitter test with empty type"),
+					UserID:    mock.NewUserID(1),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -130,9 +107,9 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post without type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
-					Text:      NewString("My twitter test without type"),
-					UserID:    1,
+					UUID:      mock.NewUUID(),
+					Text:      mock.NewString("My twitter test without type"),
+					UserID:    mock.NewUserID(1),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -143,10 +120,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with wrongly type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "wrong",
-					Text:      NewString("My twitter test with wrongly type"),
-					UserID:    1,
+					Text:      mock.NewString("My twitter test with wrongly type"),
+					UserID:    mock.NewUserID(1),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -157,9 +134,9 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with empty text",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "original",
-					UserID:    1,
+					UserID:    mock.NewUserID(1),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -170,10 +147,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post/userid=1 with original type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "original",
-					Text:      NewString("My twitter test with original type"),
-					UserID:    1,
+					Text:      mock.NewString("My twitter test with original type"),
+					UserID:    mock.NewUserID(1),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -184,10 +161,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post/userid=2 with original type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "original",
-					Text:      NewString("My twitter test with original type"),
-					UserID:    2,
+					Text:      mock.NewString("My twitter test with original type"),
+					UserID:    mock.NewUserID(2),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -198,10 +175,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post/userid=3 with original type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "original",
-					Text:      NewString("My twitter test with original type"),
-					UserID:    3,
+					Text:      mock.NewString("My twitter test with original type"),
+					UserID:    mock.NewUserID(3),
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
 				},
@@ -231,10 +208,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with repost type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "repost",
-					Text:      NewString("My twitter test with repost type"),
-					UserID:    1,
+					Text:      mock.NewString("My twitter test with repost type"),
+					UserID:    mock.NewUserID(1),
 					PostID:    &postsIDs[0],
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
@@ -246,10 +223,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with repost type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "quote",
-					Text:      NewString("My twitter test with quote type"),
-					UserID:    1,
+					Text:      mock.NewString("My twitter test with quote type"),
+					UserID:    mock.NewUserID(1),
 					PostID:    &postsIDs[1],
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
@@ -261,10 +238,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with repost type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "quote",
-					Text:      NewString("My twitter test with quote type"),
-					UserID:    2,
+					Text:      mock.NewString("My twitter test with quote type"),
+					UserID:    mock.NewUserID(2),
 					PostID:    &postsIDs[2],
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
@@ -276,10 +253,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with repost type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "quote",
-					Text:      NewString("My twitter test with quote type"),
-					UserID:    3,
+					Text:      mock.NewString("My twitter test with quote type"),
+					UserID:    mock.NewUserID(3),
 					PostID:    &postsIDs[0],
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
@@ -291,10 +268,10 @@ func AddPost(t *testing.T, ctx context.Context, repo contract.PostRepo) {
 			name: "insert post with repost type",
 			args: args{
 				entity.Post{
-					UUID:      NewUUID(),
+					UUID:      mock.NewUUID(),
 					Type:      "quote",
-					Text:      NewString("My twitter test with quote type"),
-					UserID:    1,
+					Text:      mock.NewString("My twitter test with quote type"),
+					UserID:    mock.NewUserID(1),
 					PostID:    &postsIDs[1],
 					UpdatedAt: time.Now(),
 					CreatedAt: time.Now(),
