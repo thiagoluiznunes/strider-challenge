@@ -59,6 +59,7 @@ func InitDatabaseInstance(t *testing.T, ctx context.Context, startContainer bool
 		DBName: "strider",
 		DBPass: "secret",
 		DBUser: "root",
+		DBPort: "3306",
 	}
 
 	if testing.Short() {
