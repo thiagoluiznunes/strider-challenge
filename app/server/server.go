@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strider-challenge/app/router"
 	"strider-challenge/app/router/routehomepage"
+	"strider-challenge/app/router/routeuser"
 	"strider-challenge/domain/service"
 	"strider-challenge/infra/config"
 
@@ -77,8 +78,13 @@ func (s *Server) InitServer(svc *service.Service) (err error) {
 	homePageCtrl := routehomepage.NewController(homePageSvc)
 	homePageRoute := routehomepage.NewRoute("homepage", homePageCtrl)
 
+	userSvc := service.NewUserService(*svc)
+	userCtrl := routeuser.NewController(userSvc)
+	userRoute := routeuser.NewRoute("user", userCtrl)
+
 	s.addRoute(baseRouter)
 	s.addRoute(homePageRoute)
+	s.addRoute(userRoute)
 
 	s.addMiddleware(middleware.Logger())
 

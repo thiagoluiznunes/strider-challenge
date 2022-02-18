@@ -2,7 +2,7 @@ package mock
 
 import (
 	"context"
-	viewmodel "strider-challenge/app/viewmodel/homepage"
+	"strider-challenge/app/viewmodel"
 	"strider-challenge/domain/contract"
 	"strider-challenge/domain/entity"
 	"time"

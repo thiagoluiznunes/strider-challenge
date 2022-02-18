@@ -41,7 +41,6 @@ func controllerGetAllPosts(t *testing.T, ctrl *Controller) {
 		path       string
 		paramName  string
 		paramValue string
-		queryParam string
 	}
 
 	tests := []struct {
@@ -92,7 +91,7 @@ func controllerGetAllPosts(t *testing.T, ctrl *Controller) {
 			tt.args.ctx.SetParamValues(tt.args.paramValue)
 
 			if assert.NoError(t, ctrl.GetAllPosts(tt.args.ctx)) {
-				assert.Equal(t, tt.wantStatusCode, rec.Code)
+				assert.Equal(t, tt.wantStatusCode, int64(rec.Code))
 			}
 		})
 	}

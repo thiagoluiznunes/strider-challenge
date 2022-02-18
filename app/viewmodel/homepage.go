@@ -12,10 +12,10 @@ type HomePageRequest struct {
 }
 
 type PostRequest struct {
-	UserID *int64 `json:"user_id,omitempty"`
+	UserID int64  `json:"user_id,omitempty"`
 	Type   string `json:"type,omitempty"`
 	Text   string `json:"text,omitempty"`
-	PostID *int64 `json:"post_id,omitempty"`
+	PostID int64  `json:"post_id,omitempty"`
 }
 
 func (m *HomePageRequest) Binder(ctx echo.Context) error {
@@ -35,7 +35,7 @@ func (m *HomePageRequest) Validate() error {
 
 func (m *PostRequest) Validate() error {
 
-	if m.UserID == nil {
+	if m.UserID == 0 {
 		return exception.NewValidationError("user-uuid", "empty/nil")
 	}
 
