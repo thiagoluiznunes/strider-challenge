@@ -5,6 +5,7 @@ import (
 	"strider-challenge/app/viewmodel"
 	"strider-challenge/domain/contract"
 	"strider-challenge/domain/entity"
+	"strider-challenge/infra/exception"
 )
 
 type HomeService struct {
@@ -23,14 +24,14 @@ func (s *HomeService) GetAllPosts(ctx context.Context, homePageRequestParams *vi
 	case "all":
 		result.Posts, err = s.svc.Repo.Post().GetAllPosts(ctx)
 		if err != nil {
-			return result, err
+			return result, exception.NewApplicationError(err)
 		}
 	case "following":
 		// Mocked users ids
 		usersFollowingIDs := []interface{}{1, 2, 3}
 		result.Posts, err = s.svc.Repo.Post().GetAllPostsByFollowing(ctx, usersFollowingIDs)
 		if err != nil {
-			return result, err
+			return result, exception.NewApplicationError(err)
 		}
 	}
 
@@ -42,11 +43,22 @@ func (s *HomeService) AddPost(ctx context.Context, postRequest *viewmodel.PostRe
 	post := entity.BuilderPost(postRequest)
 	err = post.Validate()
 	if err != nil {
-		return err
+		return exception.NewApplicationError(err)
 	}
-	_, err = s.svc.Repo.Post().Add(ctx, *post)
-	if err != nil {
-		return err
+
+	switch postRequest.Type {
+	case "original":
+		_, err = s.svc.Repo.Post().Add(ctx, *post)
+		if err != nil {
+			return exception.NewApplicationError(err)
+		}
+	default:
+		var mockRepostID int64 = 1
+		post.PostID = &mockRepostID
+		_, err = s.svc.Repo.Post().AddRepostOrQuote(ctx, *post)
+		if err != nil {
+			return exception.NewApplicationError(err)
+		}
 	}
 
 	return nil

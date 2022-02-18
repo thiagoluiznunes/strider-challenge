@@ -41,7 +41,6 @@ func controllerGetAllPosts(t *testing.T, ctrl *Controller) {
 		path       string
 		paramName  string
 		paramValue string
-		queryParam string
 	}
 
 	tests := []struct {

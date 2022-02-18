@@ -26,6 +26,54 @@ func (r *PostRepository) Add(ctx context.Context, post entity.Post) (postID int6
 			type,
 			text,
 			user_id,
+			updated_at,
+			created_at
+		)
+		VALUE (
+			?,
+			?,
+			?,
+			?,
+			?,
+			?
+		)
+	`
+
+	result, err := r.conn.Exec(query,
+		post.UUID,
+		post.Type,
+		post.Text,
+		post.UserID,
+		post.UpdatedAt,
+		post.CreatedAt,
+	)
+	if err != nil {
+		return postID, err
+	}
+
+	count, err := result.RowsAffected()
+	if err != nil {
+		return postID, err
+	} else if count <= 0 {
+		return postID, exception.NewConflictError("not rows affected")
+	}
+
+	postID, err = result.LastInsertId()
+	if err != nil {
+		return postID, err
+	}
+
+	return postID, nil
+}
+
+func (r *PostRepository) AddRepostOrQuote(ctx context.Context, post entity.Post) (postID int64, err error) {
+
+	const query = `
+		INSERT INTO posts (
+			uuid,
+			type,
+			text,
+			user_id,
 			post_id,
 			updated_at,
 			created_at

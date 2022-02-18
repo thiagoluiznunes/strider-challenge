@@ -12,5 +12,7 @@ type HomeService interface {
 }
 
 type UserService interface {
-	GetUserByID(ctx context.Context, userRequest *viewmodel.UserRequest) (err error)
+	GetUserByID(ctx context.Context, userRequest *viewmodel.UserRequest) (user entity.UserResponse, err error)
+	FollowUser(ctx context.Context, userRequest *viewmodel.UserRequest) (err error)
+	UnfollowUser(ctx context.Context, userRequest *viewmodel.UserRequest) (err error)
 }

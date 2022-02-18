@@ -45,7 +45,7 @@ func (c *Controller) AddPost(ctx echo.Context) error {
 
 	// Mocking UserID
 	var userID int64 = 1
-	postRequest.UserID = &userID
+	postRequest.UserID = userID
 
 	if err := ctx.Bind(postRequest); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())

@@ -47,8 +47,8 @@ func BuilderPost(view *viewmodel.PostRequest) *Post {
 		UUID:      &postUUID,
 		Type:      view.Type,
 		Text:      &view.Text,
-		UserID:    view.UserID,
-		PostID:    view.PostID,
+		UserID:    &view.UserID,
+		PostID:    &view.PostID,
 		UpdatedAt: time.Now(),
 		CreatedAt: time.Now(),
 	}
