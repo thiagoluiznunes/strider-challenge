@@ -1,7 +1,7 @@
 package serverconfig
 
 import (
-	"strider-challenge/app/router/routeutils"
+	"github.com/thiagoluiznunes/strider-challenge/app/router/routeutils"
 
 	"github.com/labstack/echo/v4"
 )

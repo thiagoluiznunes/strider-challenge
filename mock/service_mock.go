@@ -2,10 +2,11 @@ package mock
 
 import (
 	"context"
-	"strider-challenge/app/viewmodel"
-	"strider-challenge/domain/contract"
-	"strider-challenge/domain/entity"
 	"time"
+
+	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
+	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
+	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
 )
 
 type MockService struct {

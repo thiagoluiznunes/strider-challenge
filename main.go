@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
-	"strider-challenge/app/server"
-	"strider-challenge/domain/service"
-	"strider-challenge/infra/config"
-	"strider-challenge/infra/database"
-	"strider-challenge/infra/database/repository"
 	"time"
+
+	"github.com/thiagoluiznunes/strider-challenge/app/server"
+	"github.com/thiagoluiznunes/strider-challenge/domain/service"
+	"github.com/thiagoluiznunes/strider-challenge/infra/config"
+	"github.com/thiagoluiznunes/strider-challenge/infra/database"
+	"github.com/thiagoluiznunes/strider-challenge/infra/database/repository"
 
 	"github.com/sirupsen/logrus"
 )

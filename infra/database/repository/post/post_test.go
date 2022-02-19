@@ -4,12 +4,13 @@ import (
 	"context"
 	"database/sql"
 	"flag"
-	"strider-challenge/domain/contract"
-	"strider-challenge/domain/entity"
-	"strider-challenge/infra/database"
-	"strider-challenge/mock"
 	"testing"
 	"time"
+
+	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
+	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
+	"github.com/thiagoluiznunes/strider-challenge/infra/database"
+	"github.com/thiagoluiznunes/strider-challenge/mock"
 
 	"github.com/stretchr/testify/assert"
 )

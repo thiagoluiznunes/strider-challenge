@@ -1,10 +1,11 @@
 package entity
 
 import (
-	"strider-challenge/app/viewmodel"
-	"strider-challenge/infra/exception"
 	"strings"
 	"time"
+
+	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
+	"github.com/thiagoluiznunes/strider-challenge/infra/exception"
 
 	"github.com/google/uuid"
 )

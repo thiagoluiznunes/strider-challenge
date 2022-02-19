@@ -3,9 +3,10 @@ package database
 import (
 	"context"
 	"flag"
-	"strider-challenge/infra/config"
-	"strider-challenge/mock"
 	"testing"
+
+	"github.com/thiagoluiznunes/strider-challenge/infra/config"
+	"github.com/thiagoluiznunes/strider-challenge/mock"
 
 	"github.com/stretchr/testify/assert"
 )

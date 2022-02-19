@@ -2,7 +2,8 @@ package contract
 
 import (
 	"context"
-	"strider-challenge/domain/entity"
+
+	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
 )
 
 type RepoManager interface {

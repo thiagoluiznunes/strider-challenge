@@ -2,8 +2,9 @@ package repository
 
 import (
 	"database/sql"
-	"strider-challenge/domain/contract"
-	"strider-challenge/infra/database/repository/post"
+
+	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
+	"github.com/thiagoluiznunes/strider-challenge/infra/database/repository/post"
 )
 
 type RepoManager struct {

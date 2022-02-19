@@ -3,9 +3,10 @@ package database
 import (
 	"database/sql"
 	"net"
-	"strider-challenge/infra/config"
 	"sync"
 	"time"
+
+	"github.com/thiagoluiznunes/strider-challenge/infra/config"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"

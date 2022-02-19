@@ -1,4 +1,4 @@
-module strider-challenge
+module github.com/thiagoluiznunes/strider-challenge
 
 go 1.17
 

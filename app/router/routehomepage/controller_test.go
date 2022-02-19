@@ -4,8 +4,9 @@ import (
 	"flag"
 	"net/http"
 	"net/http/httptest"
-	"strider-challenge/mock"
 	"testing"
+
+	"github.com/thiagoluiznunes/strider-challenge/mock"
 
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"

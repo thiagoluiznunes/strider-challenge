@@ -3,8 +3,9 @@ package mock
 import (
 	"context"
 	"fmt"
-	"strider-challenge/infra/config"
 	"testing"
+
+	"github.com/thiagoluiznunes/strider-challenge/infra/config"
 
 	"github.com/docker/go-connections/nat"
 	"github.com/testcontainers/testcontainers-go"

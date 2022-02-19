@@ -2,8 +2,9 @@ package contract
 
 import (
 	"context"
-	"strider-challenge/app/viewmodel"
-	"strider-challenge/domain/entity"
+
+	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
+	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
 )
 
 type HomeService interface {

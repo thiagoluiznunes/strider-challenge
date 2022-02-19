@@ -2,10 +2,11 @@ package service
 
 import (
 	"context"
-	"strider-challenge/app/viewmodel"
-	"strider-challenge/domain/contract"
-	"strider-challenge/domain/entity"
-	"strider-challenge/infra/exception"
+
+	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
+	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
+	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
+	"github.com/thiagoluiznunes/strider-challenge/infra/exception"
 )
 
 type HomeService struct {
