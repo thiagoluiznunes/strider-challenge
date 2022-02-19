@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
-	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
-	"github.com/thiagoluiznunes/strider-challenge/infra/exception"
+	"strider-challenge/domain/contract"
+	"strider-challenge/domain/entity"
+	"strider-challenge/infra/exception"
 )
 
 type PostRepository struct {

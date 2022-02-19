@@ -1,4 +1,4 @@
-# github.com/thiagoluiznunes/strider-challenge
+# strider-challenge
 ---
 **Goal**: Build out a RESTful API and corresponding backend system to handle the features detailed above. This RESTful API would communicate with single page JS app. This API you build should enable all the features on both of the pages.
 

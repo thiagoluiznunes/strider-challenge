@@ -2,13 +2,12 @@ package database
 
 import (
 	"database/sql"
-	"net"
+	"fmt"
 	"sync"
-	"time"
 
-	"github.com/thiagoluiznunes/strider-challenge/infra/config"
+	"strider-challenge/infra/config"
 
-	"github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"
 )
 
@@ -23,18 +22,8 @@ func ConnectDataBase(cfg *config.Config) (*sql.DB, error) {
 	onceDataBase.Do(func() {
 		logrus.Info("::database connection initiated")
 
-		dbAddr := net.JoinHostPort(cfg.DBHost, cfg.DBPort)
-		myConfig := mysql.Config{
-			Addr:                 dbAddr,
-			User:                 cfg.DBUser,
-			Passwd:               cfg.DBPass,
-			DBName:               cfg.DBName,
-			Loc:                  &time.Location{},
-			ParseTime:            true,
-			AllowNativePasswords: true,
-		}
-
-		instance, connErr = sql.Open("mysql", myConfig.FormatDSN())
+		dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=true", cfg.DBUser, cfg.DBPass, cfg.DBHost, cfg.DBPort, cfg.DBName)
+		instance, connErr = sql.Open("mysql", dsn)
 		if connErr != nil {
 			return
 		}

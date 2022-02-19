@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 package post
 
 import (
@@ -7,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
-	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
-	"github.com/thiagoluiznunes/strider-challenge/infra/database"
-	"github.com/thiagoluiznunes/strider-challenge/mock"
+	"strider-challenge/domain/contract"
+	"strider-challenge/domain/entity"
+	"strider-challenge/infra/database"
+	"strider-challenge/mock"
 
 	"github.com/stretchr/testify/assert"
 )
