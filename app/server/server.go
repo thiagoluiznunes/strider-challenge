@@ -4,11 +4,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/thiagoluiznunes/strider-challenge/app/router"
-	"github.com/thiagoluiznunes/strider-challenge/app/router/routehomepage"
-	"github.com/thiagoluiznunes/strider-challenge/app/router/routeuser"
-	"github.com/thiagoluiznunes/strider-challenge/domain/service"
-	"github.com/thiagoluiznunes/strider-challenge/infra/config"
+	"strider-challenge/app/router"
+	"strider-challenge/app/router/routehomepage"
+	"strider-challenge/app/router/routeuser"
+	"strider-challenge/domain/service"
+	"strider-challenge/infra/config"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

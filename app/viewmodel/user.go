@@ -1,7 +1,7 @@
 package viewmodel
 
 import (
-	"github.com/thiagoluiznunes/strider-challenge/infra/exception"
+	"strider-challenge/infra/exception"
 
 	"github.com/labstack/echo/v4"
 )

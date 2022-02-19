@@ -5,7 +5,7 @@ RUN export GOBIN=$GOPATH/bin
 WORKDIR /go/src/strider
 COPY . ./
 
-RUN go mod download
+RUN go get ./...
 RUN go build -o bin/main main.go
 RUN ls
 

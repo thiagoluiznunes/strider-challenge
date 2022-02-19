@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
-	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
-	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
+	"strider-challenge/app/viewmodel"
+	"strider-challenge/domain/contract"
+	"strider-challenge/domain/entity"
 )
 
 type MockService struct {

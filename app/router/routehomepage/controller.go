@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/thiagoluiznunes/strider-challenge/app/router/routeutils"
-	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
-	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
+	"strider-challenge/app/router/routeutils"
+	"strider-challenge/app/viewmodel"
+	"strider-challenge/domain/contract"
 
 	"github.com/labstack/echo/v4"
 )

@@ -3,7 +3,7 @@ package routeutils
 import (
 	"net/http"
 
-	"github.com/thiagoluiznunes/strider-challenge/infra/exception"
+	"strider-challenge/infra/exception"
 
 	"github.com/labstack/echo/v4"
 )

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
-	"github.com/thiagoluiznunes/strider-challenge/infra/config"
+	"strider-challenge/domain/contract"
+	"strider-challenge/infra/config"
 )
 
 type Service struct {

@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/thiagoluiznunes/strider-challenge/app/server/serverconfig"
+	"strider-challenge/app/server/serverconfig"
 
 	"github.com/labstack/echo/v4"
 )

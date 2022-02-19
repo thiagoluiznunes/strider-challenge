@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 package database
 
 import (
@@ -5,8 +8,8 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/thiagoluiznunes/strider-challenge/infra/config"
-	"github.com/thiagoluiznunes/strider-challenge/mock"
+	"strider-challenge/infra/config"
+	"strider-challenge/mock"
 
 	"github.com/stretchr/testify/assert"
 )

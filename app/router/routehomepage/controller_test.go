@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/thiagoluiznunes/strider-challenge/mock"
+	"strider-challenge/mock"
 
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"

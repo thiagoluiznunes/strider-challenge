@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/thiagoluiznunes/strider-challenge/app/viewmodel"
-	"github.com/thiagoluiznunes/strider-challenge/domain/contract"
-	"github.com/thiagoluiznunes/strider-challenge/domain/entity"
-	"github.com/thiagoluiznunes/strider-challenge/infra/exception"
+	"strider-challenge/app/viewmodel"
+	"strider-challenge/domain/contract"
+	"strider-challenge/domain/entity"
+	"strider-challenge/infra/exception"
 )
 
 var MockUser entity.User
