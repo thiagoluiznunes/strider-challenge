@@ -21,7 +21,7 @@ It is necessary to install previously Docker and Docker-compose
 
 2 - In the root project directory run the followed command:
   - **obs**: it is expected the Docker is running
-  - **docker-compose up -d --force-recreate**
+  - **docker-compose up --build -d --force-recreate**
   - endpoint to access the API is http://localhost:8080
 
 3 - The execution of integration tests could be performed using the Go/Golang command as followed:
