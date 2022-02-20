@@ -194,6 +194,26 @@ GET /health
 "OK"
 ```
 
+## Planning
+
+- What is the deadline time estimated to deploy this new feature in the production environment all tested?
+- What was the opinion of the Product Design about it? Did you all have a previous talk about the impact and the requirements about this new functionality?
+- To implement this new functionality both teams, backend and frontend need to meeting together to decide the conventional details about the communication between the frontend and backend applications.
+- In the backend side we are going to redesign the database architecture, and maybe to change the to a Graph database, because we're using a OLTP database.
+- We will need to create a new table called **reply_message** with a foreing_key to the **post** table, and a foreing_key to **user_table**, if we continue with the OLTP strategy.
+- We will need to create a new route endpoint for the frontend application insert/retrieve the **reply_message** data.
+
+## Critique
+
+If I had more time, I'd like to improve:
+1. Add more integration tests, because no all was made.
+2. Create a tech docs using OpenAPI or Swagger.
+3. Design an architecture.
+4. Create a CI/CD workflow.
+5. Design a AWS architecture to deploy the application in the Cloud. For example a simple architecture in the begining composed by: One Application Load Balancer, attached to a Auto Scaling Group to ECS Tasks Fargate, using a ECR image deployed by the CI/CD workflow.
+6. Add observability and instrumentation using NewRelic or OpenTelemety.
+7. Change the database strategy to a Graph database like AWS Neptune. Even because is better using a Graph database to social media application.
+
 ### Autor
 
 * Thiago Luiz Pereira Nunes ([ThiagoLuizNunes](github.com/thiagoluiznunes)) thiagoluiz.dev@gmail.com
